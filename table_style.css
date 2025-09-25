@@ -1,0 +1,144 @@
+/* table styling */
+
+* {
+	padding: 0;
+	margin: 0;
+	background-color:#4DA1A9;
+}
+.table-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+}
+
+table {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 14px;
+	border-radius: 10px;
+	border-spacing: 0;
+	text-align: center;
+}
+
+caption {
+	color: white;
+	margin-bottom: 7px;
+	font-size: 20px;
+}
+
+th {
+	background: rgba(255, 137, 0, 0.9);
+	padding: 10px 20px;
+	color: rgba(129, 69, 0, 1);
+}
+th,
+td {
+	border-style: solid;
+	border-width: 0 1px 1px 0;
+	border-color: rgba(0, 0, 0, 0.1);
+}
+
+th:first-child {
+	border-top-left-radius: 5px;
+}
+th:last-child {
+	border-top-right-radius: 5px;
+	border-right: none;
+}
+th:first-child,
+td:first-child {
+	padding: 7px 8px;
+}
+
+td {
+	padding: 7px 20px;
+	background: rgba(230, 230, 230, 1);
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.top td {
+	color: rgba(0, 0, 0, 1);
+	font-weight: bold;
+	background:#3A3960;
+	color:#FAFFC5;
+}
+
+tr:last-child td:first-child {
+	border-radius: 0 0 0 5px;
+}
+tr:last-child td:last-child {
+	border-radius: 0 0 5px 0;
+}
+tr td:last-child {
+	border-right: none;
+}
+
+td:hover {
+	background-color: #6a7080;
+}
+
+/* ------- table title styling -------------*/
+.table-title h1 {
+	position: relative;
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: 0px;
+	text-transform: uppercase;
+	width: 150px;
+	text-align: center;
+	margin: auto;
+	white-space: nowrap;
+	border: 2px solid #222;
+	padding: 5px 11px 3px 11px;
+}
+.table-title h1:before,
+.table-title h1:after {
+	background-color: #c50000;
+	position: absolute;
+	content: "";
+	height: 7px;
+
+	width: 7px;
+	border-radius: 50%;
+	bottom: 12px;
+}
+.table-title h1:before {
+	left: -20px;
+}
+.table-title h1:after {
+	right: -20px;
+}
+
+/* ------- pagination style -------------*/
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination a {
+	color:#FAFFC5;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	border: 2px solid #ddd;
+}
+
+.pagination a.active {
+	background-color:#3A3960;
+	color: white;
+	border: 1px solid #4caf50;
+}
+
+.pagination a:hover:not(.active) {
+	background-color: #ddd;
+}
+
+.pagination a:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}

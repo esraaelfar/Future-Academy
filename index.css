@@ -1,0 +1,100 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+/* إعدادات أساسية */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #8db5ff, #80a9f0);
+    font-family: "Luckiest Guy", serif;
+    color: white;
+}
+
+/* الحاوية */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* نص الترحيب */
+.welcome-text {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.welcome-text span {
+    display: inline-block;
+    
+}
+
+/* إعداد لكل حرف */
+.welcome-text span:nth-child(1) { --i: 1; }
+.welcome-text span:nth-child(2) { --i: 2; }
+.welcome-text span:nth-child(3) { --i: 3; }
+.welcome-text span:nth-child(4) { --i: 4; }
+.welcome-text span:nth-child(5) { --i: 5; }
+.welcome-text span:nth-child(6) { --i: 6; }
+.welcome-text span:nth-child(7) { --i: 7; }
+.welcome-text span:nth-child(9) { --i: 8; }
+.welcome-text span:nth-child(10) { --i: 9; }
+
+/* أنيميشن الحروف */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+        color: #FFFDF0;
+    }
+    50% {
+        transform: translateY(-20px);
+        color:#FFFDF0;
+    }
+}
+
+/* الصورة */
+.image {
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* الزر */
+.button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #fe3815;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    animation: fadeIn 2.5s ease-in-out;
+}
+
+.button:hover {
+    background-color:#0534a0;
+    transform: scale(1.4);
+    font-weight: 900;
+}
+
+/* أنيميشن العناصر */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
