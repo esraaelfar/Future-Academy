@@ -127,11 +127,11 @@ function scoreTableUpdate() {
 		if (i == 1) {
 			//top score
 			drw.setAttribute("class", "top");
-			data.innerHTML = "🌟" + i; //TODO: paste the litera utf-8 code instead
+			data.innerHTML = i; //TODO: paste the litera utf-8 code instead
 		} else if (i == 2) {
-			data.innerHTML = "🥈"; //TODO: paste the litera utf-8 code instead
+			data.innerHTML =  i; //TODO: paste the litera utf-8 code instead
 		} else if (i == 3) {
-			data.innerHTML = "🥉"; //TODO: paste the litera utf-8 code instead
+			data.innerHTML =  i; //TODO: paste the litera utf-8 code instead
 		} else {
 			data.innerHTML = i;
 		}
