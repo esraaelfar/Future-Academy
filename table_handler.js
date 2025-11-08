@@ -12,12 +12,12 @@ function paginationUpdate() {
 
 	paginA[0].setAttribute(//update forward button
 		"href",
-		(tablePgNo == 1 ? "scores_g1.html" : ("scores_g" + (tablePgNo-1) + ".html"))
+		(tablePgNo == 1 ? "scores_g2.html" : ("scores_g" + (tablePgNo-1) + ".html"))
 	); 
 	if (tablePgNo == 2) {
 		paginA[0].setAttribute(
 			"href",
-			"scores_g1.html"
+			"scores_g2.html"
 		);//first table has diff name : index.html
 	}
 
@@ -35,7 +35,7 @@ function paginationUpdate() {
 			paginA[i].setAttribute("class", "active");
 		}
 		if (i == 1) {
-			paginA[i].setAttribute("href", "scores_g1.html");
+			paginA[i].setAttribute("href", "scores_g2.html");
 		} else {
 			paginA[i].setAttribute("href", "./scores_g" + i + ".html");
 		}
