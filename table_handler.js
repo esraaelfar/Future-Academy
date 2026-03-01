@@ -1,4 +1,4 @@
-function playSound(){
+function playSound() {
 	let mySound = new Audio('./retro_load.mp3');
 	mySound.play();
 }
@@ -12,8 +12,8 @@ function paginationUpdate() {
 
 	paginA[0].setAttribute(//update forward button
 		"href",
-		(tablePgNo == 1 ? "scores_g1.html" : ("scores_g" + (tablePgNo-1) + ".html"))
-	); 
+		(tablePgNo == 1 ? "scores_g1.html" : ("scores_g" + (tablePgNo - 1) + ".html"))
+	);
 	if (tablePgNo == 2) {
 		paginA[0].setAttribute(
 			"href",
@@ -24,8 +24,8 @@ function paginationUpdate() {
 	paginA[paginA.length - 1].setAttribute(//update backward button
 		"href",
 		"scores_g" +
-			((tablePgNo >= paginA.length - 2 ? tablePgNo - 1 : tablePgNo) + 1) +
-			".html"
+		((tablePgNo >= paginA.length - 2 ? tablePgNo - 1 : tablePgNo) + 1) +
+		".html"
 	);
 
 	for (var i = 1; i < paginA.length - 1; i++) {
@@ -116,7 +116,9 @@ function scoreTableUpdate() {
 	hrw.appendChild(scoreHead);
 	updatedTable.appendChild(hrw);
 
-	let i = 1;
+	let currentPos = 1;
+	let prevScore = null;
+
 	_scoresMap.forEach((score, name) => {
 		//fill table data
 		let drw = document.createElement("tr");
@@ -124,16 +126,24 @@ function scoreTableUpdate() {
 		let data2 = document.createElement("td");
 		let data3 = document.createElement("td");
 
-		if (i == 1) {
+		if (prevScore !== null && score < prevScore) {
+			currentPos++;
+		}
+
+		if (score === 0) {
+			data.innerHTML = currentPos;
+		} else if (currentPos == 1) {
 			//top score
 			drw.setAttribute("class", "top");
-			data.innerHTML = i; //TODO: paste the litera utf-8 code instead
-		} else if (i == 2) {
-			data.innerHTML =  i; //TODO: paste the litera utf-8 code instead
-		} else if (i == 3) {
-			data.innerHTML =  i; //TODO: paste the litera utf-8 code instead
+			data.innerHTML = "👑"; // Removed number
+		} else if (currentPos == 2) {
+			drw.setAttribute("class", "second");
+			data.innerHTML = "🥈"; // Removed number
+		} else if (currentPos == 3) {
+			drw.setAttribute("class", "third");
+			data.innerHTML = currentPos;
 		} else {
-			data.innerHTML = i;
+			data.innerHTML = currentPos;
 		}
 		drw.appendChild(data);
 
@@ -144,7 +154,8 @@ function scoreTableUpdate() {
 		drw.appendChild(data3);
 
 		updatedTable.appendChild(drw);
-		i++;
+
+		prevScore = score;
 	});
 
 	bodyElm.appendChild(updatedTable);

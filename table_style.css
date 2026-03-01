@@ -1,144 +1,257 @@
-/* table styling */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
 
 * {
 	padding: 0;
 	margin: 0;
-	background-color:#4DA1A9;
+	box-sizing: border-box;
 }
+
+body {
+	background: radial-gradient(circle at top right, #118AB2, #06D6A0, #FFD166);
+	background-attachment: fixed;
+	font-family: 'Nunito', sans-serif;
+	color: #fff;
+	overflow-x: hidden;
+}
+
 .table-div {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 80vh;
+	min-height: 65vh;
+	padding: 20px;
 }
 
 table {
-	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	font-size: 14px;
-	border-radius: 10px;
+	background: #FFF;
+	border-radius: 25px;
 	border-spacing: 0;
 	text-align: center;
+	box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+	border: 8px solid rgba(255, 255, 255, 0.5);
+	overflow: hidden;
+	width: 90%;
+	max-width: 800px;
+	margin-top: 20px;
 }
 
 caption {
-	color: white;
-	margin-bottom: 7px;
-	font-size: 20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 th {
-	background: rgba(255, 137, 0, 0.9);
-	padding: 10px 20px;
-	color: rgba(129, 69, 0, 1);
-}
-th,
-td {
-	border-style: solid;
-	border-width: 0 1px 1px 0;
-	border-color: rgba(0, 0, 0, 0.1);
+	background: #EF476F;
+	padding: 18px 20px;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-family: 'Fredoka One', cursive;
+	font-size: 18px;
 }
 
 th:first-child {
-	border-top-left-radius: 5px;
+	border-top-left-radius: 17px;
 }
+
 th:last-child {
-	border-top-right-radius: 5px;
-	border-right: none;
-}
-th:first-child,
-td:first-child {
-	padding: 7px 8px;
+	border-top-right-radius: 17px;
 }
 
 td {
-	padding: 7px 20px;
-	background: rgba(230, 230, 230, 1);
-	color: rgba(0, 0, 0, 0.6);
+	padding: 15px 20px;
+	background: #fff;
+	color: #454545;
+	font-weight: 800;
+	font-size: 18px;
+	border-bottom: 2px dashed #EEE;
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+tr:last-child td {
+	border-bottom: none;
+}
+
+/* Colorful top ranks */
 .top td {
-	color: rgba(0, 0, 0, 1);
-	font-weight: bold;
-	background:#3A3960;
-	color:#FAFFC5;
+	color: #fff;
+	background: #FFD166;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+	font-size: 22px;
 }
 
-tr:last-child td:first-child {
-	border-radius: 0 0 0 5px;
-}
-tr:last-child td:last-child {
-	border-radius: 0 0 5px 0;
-}
-tr td:last-child {
-	border-right: none;
+.second td {
+	color: #fff;
+	background: #B5B5B5;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+	font-size: 20px;
 }
 
-td:hover {
-	background-color: #6a7080;
+.third td {
+	color: #fff;
+	background: #F4A261;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effects */
+tr:hover td {
+	background-color: #F8F9FA;
+	transform: scale(1.03);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	z-index: 10;
+	position: relative;
+	border-radius: 10px;
+	color: #EF476F;
+}
+
+.top:hover td {
+	background: #FFC024;
+}
+
+.second:hover td {
+	background: #9E9E9E;
+}
+
+.third:hover td {
+	background: #E78A41;
 }
 
 /* ------- table title styling -------------*/
 .table-title h1 {
 	position: relative;
-	font-size: 20px;
-	font-weight: 700;
-	letter-spacing: 0px;
+	font-size: 32px;
+	font-family: 'Fredoka One', cursive;
+	letter-spacing: 2px;
 	text-transform: uppercase;
-	width: 150px;
+	display: inline-block;
 	text-align: center;
-	margin: auto;
+	padding: 15px 35px;
+	background: #FF9F1C;
+	color: white;
+	border-radius: 50px;
+	box-shadow: 0 8px 0px #CC7910, 0 15px 20px rgba(0, 0, 0, 0.2);
+	border: 6px solid #FFF;
+	transition: transform 0.3s;
 	white-space: nowrap;
-	border: 2px solid #222;
-	padding: 5px 11px 3px 11px;
+	min-width: max-content;
 }
-.table-title h1:before,
-.table-title h1:after {
-	background-color: #c50000;
-	position: absolute;
-	content: "";
-	height: 7px;
 
-	width: 7px;
-	border-radius: 50%;
-	bottom: 12px;
+.table-title h1:hover {
+	transform: scale(1.05);
 }
-.table-title h1:before {
-	left: -20px;
+
+/* Row Entrance Animation */
+@keyframes rowPop {
+	0% {
+		opacity: 0;
+		transform: scale(0.9) translateY(20px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1) translateY(0);
+	}
 }
-.table-title h1:after {
-	right: -20px;
+
+tr {
+	animation: rowPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+tr:nth-child(2) {
+	animation-delay: 0.1s;
+}
+
+tr:nth-child(3) {
+	animation-delay: 0.2s;
+}
+
+tr:nth-child(4) {
+	animation-delay: 0.3s;
+}
+
+tr:nth-child(5) {
+	animation-delay: 0.4s;
+}
+
+tr:nth-child(6) {
+	animation-delay: 0.5s;
+}
+
+tr:nth-child(7) {
+	animation-delay: 0.6s;
+}
+
+tr:nth-child(8) {
+	animation-delay: 0.7s;
 }
 
 /* ------- pagination style -------------*/
 .pagination {
 	display: flex;
 	justify-content: center;
+	margin-top: 10px;
+	gap: 10px;
+	margin-bottom: 20px;
 }
 
 .pagination a {
-	color:#FAFFC5;
-	float: left;
-	padding: 8px 16px;
+	color: #EF476F;
+	padding: 12px 20px;
 	text-decoration: none;
-	border: 2px solid #ddd;
+	background: #FFF;
+	border-radius: 50%;
+	font-family: 'Fredoka One', cursive;
+	font-size: 18px;
+	box-shadow: 0 6px 0px #DDD, 0 10px 10px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s ease;
 }
 
 .pagination a.active {
-	background-color:#3A3960;
+	background: #06D6A0;
 	color: white;
-	border: 1px solid #4caf50;
+	box-shadow: 0 6px 0px #04A57B;
+	transform: translateY(-5px);
 }
 
 .pagination a:hover:not(.active) {
-	background-color: #ddd;
+	background: #FFE3E9;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 0px #DDD;
 }
 
-.pagination a:first-child {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+.pagination a:active:not(.active) {
+	transform: translateY(6px);
+	box-shadow: 0 0px 0px #DDD;
 }
 
-.pagination a:last-child {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+/* --- Responsive Design --- */
+@media (max-width: 600px) {
+	.table-div {
+		padding: 10px;
+	}
+
+	table {
+		width: 100%;
+		border-width: 4px;
+	}
+
+	td {
+		font-size: 14px;
+		padding: 10px;
+	}
+
+	.top td {
+		font-size: 16px;
+	}
+
+	.table-title h1 {
+		font-size: 24px;
+		padding: 10px 20px;
+		border-width: 4px;
+	}
+
+	.pagination a {
+		padding: 10px 15px;
+		font-size: 16px;
+	}
 }

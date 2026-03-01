@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
 
 /* إعدادات أساسية */
 body {
@@ -9,9 +8,26 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #8db5ff, #80a9f0);
-    font-family: "Luckiest Guy", serif;
+    background: radial-gradient(circle at 50% 50%, #FFD166, #FF9F1C, #EF476F, #118AB2);
+    background-size: 300% 300%;
+    animation: funBackground 15s ease infinite;
+    font-family: "Fredoka One", cursive;
     color: white;
+    overflow: hidden;
+}
+
+@keyframes funBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* الحاوية */
@@ -20,81 +36,116 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 40px;
+    /* More rounded for kids */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 8px rgba(255, 255, 255, 0.4);
+    /* Fun border */
+    transform: translateY(30px) scale(0.9);
+    animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popIn {
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 /* نص الترحيب */
 .welcome-text {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 3.5rem;
+    font-weight: normal;
+    /* Fredoka One is naturally bold */
+    margin-bottom: 25px;
     display: inline-block;
-    animation: fadeIn 3s ease-in-out;
+    color: #FFF;
+    text-shadow: 4px 4px 0px #EF476F,
+        8px 8px 0px rgba(0, 0, 0, 0.2);
+    letter-spacing: 3px;
+    animation: wiggle 3s ease-in-out infinite;
 }
 
 .welcome-text span {
     display: inline-block;
-    
-}
-
-/* إعداد لكل حرف */
-.welcome-text span:nth-child(1) { --i: 1; }
-.welcome-text span:nth-child(2) { --i: 2; }
-.welcome-text span:nth-child(3) { --i: 3; }
-.welcome-text span:nth-child(4) { --i: 4; }
-.welcome-text span:nth-child(5) { --i: 5; }
-.welcome-text span:nth-child(6) { --i: 6; }
-.welcome-text span:nth-child(7) { --i: 7; }
-.welcome-text span:nth-child(9) { --i: 8; }
-.welcome-text span:nth-child(10) { --i: 9; }
-
-/* أنيميشن الحروف */
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-        color: #FFFDF0;
-    }
-    50% {
-        transform: translateY(-20px);
-        color:#FFFDF0;
-    }
+    animation: colorfulBounce 2s infinite alternate;
 }
 
 /* الصورة */
 .image {
-    width: 400px;
-    height: 400px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    animation: fadeIn 2s ease-in-out;
+    width: 280px;
+    height: 280px;
+    margin-bottom: 35px;
+    border-radius: 50%;
+    /* Circle image */
+    object-fit: cover;
+    border: 8px solid #06D6A0;
+    box-shadow: 0 15px 25px rgba(6, 214, 160, 0.4);
+    animation: bobble 3s infinite alternate ease-in-out;
+    background: #FFF;
+}
+
+@keyframes bobble {
+    0% {
+        transform: scale(1) rotate(-5deg);
+    }
+
+    100% {
+        transform: scale(1.05) rotate(5deg);
+    }
 }
 
 /* الزر */
 .button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background-color: #fe3815;
+    padding: 18px 50px;
+    font-family: "Fredoka One", cursive;
+    font-size: 1.8rem;
+    background: #06D6A0;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
-    animation: fadeIn 2.5s ease-in-out;
+    box-shadow: 0 10px 0 #04a57b, 0 15px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .button:hover {
-    background-color:#0534a0;
-    transform: scale(1.4);
-    font-weight: 900;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 0 #04a57b, 0 20px 25px rgba(0, 0, 0, 0.3);
+    background: #15E8B1;
 }
 
-/* أنيميشن العناصر */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
+.button:active {
+    transform: translateY(5px);
+    box-shadow: 0 5px 0 #04a57b, 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 600px) {
+    .container {
+        padding: 30px 20px;
+        width: 90%;
+        border-radius: 30px;
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+
+    .welcome-text {
+        font-size: 2.2rem;
+        text-shadow: 3px 3px 0px #EF476F;
+    }
+
+    .image {
+        width: 220px;
+        height: 220px;
+        border-width: 6px;
+    }
+
+    .button {
+        padding: 15px 35px;
+        font-size: 1.5rem;
     }
 }

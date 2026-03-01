@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Animation</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div class="container">
         <h1 class="welcome-text">
@@ -17,13 +19,21 @@
             <span>&nbsp;</span>
             <span>B</span>
             <span>o</span>
-               <span>a</span>
+            <span>a</span>
             <span>r</span>
-               <span>d</span>
-           
+            <span>d</span>
+
         </h1>
         <img src="ff.png" alt="Sample Image" class="image">
-        <a href="scores_g1.html"><button class="button">Click Me</button></a>
+        <a id="redirect-link" href="scores_g1.html"><button class="button">Click Me</button></a>
     </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page');
+        if (page) {
+            document.getElementById('redirect-link').href = `scores_g${page}.html`;
+        }
+    </script>
 </body>
+
 </html>
