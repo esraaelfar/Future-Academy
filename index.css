@@ -134,8 +134,9 @@ body {
     }
 
     .welcome-text {
-        font-size: 2.2rem;
+        font-size: clamp(1.5rem, 8vw, 2.2rem);
         text-shadow: 3px 3px 0px #EF476F;
+        white-space: nowrap;
     }
 
     .image {
