@@ -1,6 +1,7 @@
 function playSound() {
 	let mySound = new Audio('./retro_load.mp3');
-	mySound.play();
+    mySound.volume = 0.5; // Softer volume for kids
+	mySound.play().catch(e => console.log("Audio play prevented by browser policy"));
 }
 
 
@@ -41,6 +42,7 @@ function paginationUpdate() {
 		}
 	}
 }
+
 function scoreTableSort() {
 	let scoresMap = new Map(); //key is  user name and value is Scores
 	let oldScoresTable = Array.from(document.querySelectorAll("tr"));
@@ -66,28 +68,6 @@ function scoreTableSort() {
 }
 
 function scoreTableUpdate() {
-	// 	<table>
-	// 	<caption>SCORES</caption>
-	// <tr>
-	//  <th>Pos</th>
-	//  <th>Name</th>
-	//  <th>Score</th>
-	//  </tr>
-	// <tr class="top">
-	//  <td>🌟1</td>
-	//  <td>Bill</td>
-	//  <td>123</td>
-	// </tr>
-	// <tr>
-	//  <td>2</td>
-	//  <td>Garry</td>
-	//  <td>34</td>
-	// </tr>
-	// .
-	// .
-	// .
-	// </table>
-
 	_scoresMap = scoreTableSort();
 
 	document.getElementsByTagName("table")[0].remove();
@@ -135,10 +115,10 @@ function scoreTableUpdate() {
 		} else if (currentPos == 1) {
 			//top score
 			drw.setAttribute("class", "top");
-			data.innerHTML = "👑"; // Removed number
+			data.innerHTML = '<span class="crown-icon">👑</span>';
 		} else if (currentPos == 2) {
 			drw.setAttribute("class", "second");
-			data.innerHTML = "🥈"; // Removed number
+			data.innerHTML = '<span class="medal-icon">🥈</span>';
 		} else if (currentPos == 3) {
 			drw.setAttribute("class", "third");
 			data.innerHTML = currentPos;
