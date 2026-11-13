@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Academy - لوحة تحكم المهندس 🔐</title>
+    <link rel="stylesheet" href="./table_style.css">
+    <link rel="stylesheet" href="./admin.css">
+    <script src="./xlsx.full.min.js"></script>
+    <script src="./data_manager.js"></script>
+</head>
+
+<body>
+    <!-- ========================================================
+         LOGIN SCREEN (Visible when not logged in)
+         ======================================================== -->
+    <div id="login-screen" class="admin-login-container">
+        <div class="login-card">
+            <div class="lock-avatar">🔐</div>
+            <h2>لوحة تحكم المهندس</h2>
+            <p class="login-subtitle">أهلاً بك يا باشمهندس 👨‍💻<br>يرجى إدخال رمز المرور (PIN) للوصول إلى لوحة إدارة الدرجات والطلاب</p>
+
+            <form id="login-form">
+                <div class="pin-input-group">
+                    <input type="password" id="pin-input" maxlength="8" placeholder="••••" autocomplete="off" autofocus>
+                </div>
+                <div id="login-error" class="login-error" style="display: none;">رمز المرور غير صحيح! يرجى المحاولة مرة أخرى</div>
+                <button type="submit" class="btn-primary login-btn">دخول إلى لوحة التحكم 🚀</button>
+            </form>
+
+            <a href="scores_g1.html" class="back-link">← العودة للوحة الدرجات</a>
+        </div>
+    </div>
+
+    <!-- ========================================================
+         ADMIN DASHBOARD (Visible when logged in)
+         ======================================================== -->
+    <div id="dashboard-screen" class="admin-dashboard-container" style="display: none;">
+        
+        <!-- Top Navigation Bar -->
+        <header class="admin-header">
+            <div class="header-brand">
+                <span class="brand-icon">🚀</span>
+                <div>
+                    <h1>لوحة إدارة وتعديل الدرجات</h1>
+                    <span class="brand-sub">Future Academy • Engineer Dashboard</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <a id="btn-view-scoreboard" href="scores_g1.html" class="btn-header btn-view" title="عرض لوحة الشرف">
+                    <span>🏆</span> عرض لوحة الشرف
+                </a>
+                <button id="btn-change-pin" class="btn-header btn-settings" title="تغيير رمز المرور">
+                    <span>🔑</span> تغيير الـ PIN
+                </button>
+                <button id="btn-logout" class="btn-header btn-logout" title="تسجيل الخروج">
+                    <span>🚪</span> خروج
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="admin-main">
+
+            <!-- Groups Navigation & Management Bar -->
+            <section class="groups-section">
+                <div class="section-top-bar">
+                    <div class="groups-tabs-scroll" id="groups-tabs-container">
+                        <!-- Dynamic Group Tabs will be rendered here -->
+                    </div>
+                    <button id="btn-add-group" class="btn-action btn-add-group" type="button">
+                        <span>➕</span> إضافة مجموعة جديدة
+                    </button>
+                </div>
+
+                <!-- Active Group Info & Edit -->
+                <div class="group-details-card">
+                    <div class="group-details-form">
+                        <label for="group-title-input">اسم / موعد المجموعة الحالية:</label>
+                        <div class="input-with-button">
+                            <input type="text" id="group-title-input" placeholder="مثلاً: Arduino Code Friday 1:3">
+                            <button id="btn-save-group-title" class="btn-save-title">حفظ الاسم</button>
+                        </div>
+                    </div>
+                    <div class="group-actions-right">
+                        <button id="btn-delete-group" class="btn-delete-group" title="حذف هذه المجموعة">
+                            <span>🗑️</span> حذف هذه المجموعة
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Students & Scores Editor Section -->
+            <section class="students-section">
+                <div class="students-header-bar">
+                    <div class="students-count-badge">
+                        <span>👥 الطلاب في هذه المجموعة: </span>
+                        <strong id="students-count-num">0</strong>
+                    </div>
+                    <div class="students-actions">
+                        <button id="btn-add-student" class="btn-action btn-add-student" type="button">
+                            <span>➕</span> إضافة طالب جديد
+                        </button>
+                        <button id="btn-save-all" class="btn-action btn-save-all" type="button">
+                            <span>💾</span> حفظ كل التعديلات
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Students Dynamic Table -->
+                <div class="table-responsive-wrapper">
+                    <table class="admin-students-table">
+                        <thead>
+                            <tr id="table-headers-row">
+                                <th style="width: 50px;">#</th>
+                                <th>اسم الطالب</th>
+                                <!-- Dynamic Criteria Headers (Attendance, Tasks, Participation) -->
+                                <th>المجموع 🏆</th>
+                                <th style="width: 80px;">إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="students-table-body">
+                            <!-- Dynamic Student Rows will be rendered here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Excel & Backup Section -->
+            <section class="tools-section">
+                <div class="tools-card">
+                    <h3>📊 استيراد وتصدير ملفات الإكسيل (Excel / Sheets)</h3>
+                    <p class="tools-subtitle">يمكنك تصدير كشوف الدرجات بالكامل إلى ملف Excel منظم، أو استيراد ملف Excel لتحديث الدرجات فوراً.</p>
+                    <div class="tools-buttons">
+                        <button id="btn-export-excel-all" class="btn-tool btn-excel-tool" type="button" title="تصدير جميع المجموعات في شيت إكسيل موحد">
+                            <span>📊</span> تصدير جميع المجموعات (Excel Workbook)
+                        </button>
+                        <button id="btn-export-excel-active" class="btn-tool btn-excel-tool" type="button" title="تصدير كشف درجات المجموعة المحددة فقط">
+                            <span>📑</span> تصدير المجموعة الحالية فقط
+                        </button>
+                        <button id="btn-import-excel" class="btn-tool btn-excel-import" type="button" title="استيراد وتحديث الدرجات من ملف إكسيل">
+                            <span>📥</span> استيراد من ملف Excel
+                        </button>
+                        <button id="btn-download-template" class="btn-tool" type="button" title="تحميل قالب إكسيل جاهز لكتابة الدرجات">
+                            <span>📄</span> تحميل قالب إكسيل فارغ
+                        </button>
+                        <button id="btn-reset-default" class="btn-tool btn-danger-tool" type="button" title="استعادة الدرجات والمجموعات الأصلية">
+                            <span>🔄</span> استعادة البيانات الأصلية
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="admin-toast" class="admin-toast">تم حفظ التعديلات بنجاح! 🎉</div>
+
+    <!-- Change PIN Modal -->
+    <div id="pin-modal" class="admin-modal-overlay" style="display: none;">
+        <div class="admin-modal">
+            <h3>🔑 تغيير رمز المرور (PIN)</h3>
+            <p>أدخل رمز المرور الجديد (4 أرقام على الأقل):</p>
+            <input type="password" id="new-pin-input" placeholder="مثال: 5678" maxlength="8">
+            <div class="modal-buttons">
+                <button id="btn-confirm-pin" class="btn-primary">تأكيد الحفظ</button>
+                <button id="btn-cancel-pin" class="btn-secondary">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for Excel import -->
+    <input type="file" id="import-excel-input" accept=".xlsx, .xls, .csv" style="display: none;">
+
+    <script src="./admin.js"></script>
+</body>
+
+</html>

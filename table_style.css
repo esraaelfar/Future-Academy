@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;800;900&display=swap');
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -14,7 +15,8 @@ body {
     font-family: 'Nunito', sans-serif;
     color: #fff;
     overflow-x: hidden;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
+    min-height: 100vh;
 }
 
 @keyframes gradientMove {
@@ -23,286 +25,781 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+/* Container */
 .table-div {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 65vh;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 20px 15px;
+    margin-top: 10px;
+    width: 100%;
 }
 
-table {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 35px;
-    border-spacing: 0;
-    text-align: center;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), inset 0 0 0 10px rgba(255, 255, 255, 0.6);
-    border: none;
-    overflow: hidden;
-    width: 95%;
-    max-width: 800px;
-    margin-top: 20px;
-    transform: translateY(20px);
+.scoreboard-container {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     animation: slideUpPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes slideUpPop {
+    from {
+        transform: translateY(25px) scale(0.97);
+        opacity: 0;
+    }
     to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 }
 
-caption {
-    margin-bottom: 30px;
-    margin-top: 20px;
+/* Header & Animated Title */
+.scoreboard-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
-th {
-    background: #EF476F;
-    padding: 20px 20px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Fredoka One', cursive;
-    font-size: 20px;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 6px 10px rgba(0,0,0,0.1);
-    z-index: 5;
+.table-title {
+    margin-bottom: 15px;
 }
 
-th:first-child {
-    border-top-left-radius: 25px;
-}
-
-th:last-child {
-    border-top-right-radius: 25px;
-}
-
-td {
-    padding: 18px 20px;
-    background: #fff;
-    color: #454545;
-    font-weight: 900;
-    font-size: 20px;
-    border-bottom: 2px dashed #E0E0E0;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-tr:last-child td {
-    border-bottom: none;
-}
-
-/* Colorful top ranks */
-.top td {
-    color: #fff;
-    background: linear-gradient(135deg, #FFD166, #FFB347);
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
-    font-size: 24px;
-}
-
-.second td {
-    color: #fff;
-    background: linear-gradient(135deg, #B5B5B5, #9E9E9E);
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
-    font-size: 22px;
-}
-
-.third td {
-    color: #fff;
-    background: linear-gradient(135deg, #F4A261, #E76F51);
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
-}
-
-/* Hover effects */
-tr:hover td {
-    background-color: #F8F9FA;
-    transform: scale(1.04) translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    z-index: 10;
-    position: relative;
-    border-radius: 15px;
-    color: #EF476F;
-}
-
-.top:hover td {
-    background: linear-gradient(135deg, #FFC024, #FFA000);
-}
-
-.second:hover td {
-    background: linear-gradient(135deg, #A8A8A8, #808080);
-}
-
-.third:hover td {
-    background: linear-gradient(135deg, #E78A41, #D84315);
-}
-
-/* ------- table title styling -------------*/
 .table-title h1 {
-    position: relative;
-    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Extremely fluid */
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
     font-family: 'Fredoka One', cursive;
     letter-spacing: 3px;
     text-transform: uppercase;
     display: inline-block;
     text-align: center;
-    padding: 15px 40px;
+    padding: 14px 42px;
     background: #FF9F1C;
     color: white;
     border-radius: 50px;
-    box-shadow: 0 10px 0px #CC7910, 0 20px 25px rgba(0, 0, 0, 0.25);
-    border: 8px solid #FFF;
+    box-shadow: 0 10px 0px #CC7910, 0 20px 30px rgba(0, 0, 0, 0.25);
+    border: 7px solid #FFF;
+    white-space: nowrap;
+    animation: titleBounce 2.5s infinite alternate ease-in-out;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    white-space: nowrap; /* CRITICAL: Prevents text wrapping */
-    min-width: max-content; /* CRITICAL: Element expands to fit content */
-    margin: 0 auto;
-    animation: titleBounce 2s infinite alternate ease-in-out;
 }
 
 @keyframes titleBounce {
     0% { transform: scale(1) rotate(-1deg); }
-    100% { transform: scale(1.05) rotate(1deg); }
+    100% { transform: scale(1.04) rotate(1deg); }
 }
 
 .table-title h1:hover {
-    transform: scale(1.1) rotate(0deg);
+    transform: scale(1.08) rotate(0deg);
 }
 
-/* Emoji Icons (Crown & Medal natively defined here!) */
+/* Controls Bar (Stats, View Mode, Sound) */
+.scoreboard-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 860px;
+    margin-top: 5px;
+}
+
+.stat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(255, 255, 255, 0.55);
+    color: #FFF;
+    font-weight: 800;
+    font-size: 14.5px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.stat-badge.top-student {
+    background: rgba(255, 209, 102, 0.4);
+    border-color: #FFD166;
+    color: #FFF;
+}
+
+.controls-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FFF;
+    color: #EF476F;
+    border: none;
+    font-family: 'Fredoka One', cursive;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #DDD, 0 8px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    background: #FFE3E9;
+    box-shadow: 0 6px 0px #E5B2BD, 0 10px 18px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:active {
+    transform: translateY(3px) scale(0.97);
+    box-shadow: 0 1px 0px #DDD;
+}
+
+.coach-lock-btn {
+    padding: 8px 14px;
+    background: #FFF;
+    color: #4A5568;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    box-shadow: 0 4px 0px #DDD, 0 8px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.coach-lock-btn:hover {
+    transform: translateY(-2px) scale(1.1);
+    background: #FFFBEB;
+    box-shadow: 0 6px 0px #FDE68A, 0 10px 18px rgba(0, 0, 0, 0.2);
+}
+
+.sound-btn {
+    padding: 8px 12px;
+}
+
+/* ========================================================
+   DESKTOP TABLE VIEW (Default for Wide Screens)
+   ======================================================== */
+.scoreboard-table {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 32px;
+    border-spacing: 0;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.22), inset 0 0 0 8px rgba(255, 255, 255, 0.6);
+    border: none;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.scoreboard-table thead tr {
+    background: linear-gradient(135deg, #EF476F, #FF597B);
+}
+
+.scoreboard-table th {
+    padding: 18px 16px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 17px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    border: none;
+}
+
+.scoreboard-table th.th-pos { width: 75px; }
+.scoreboard-table th.th-name { text-align: left; padding-left: 24px; }
+.scoreboard-table th.th-total { width: 130px; }
+
+.scoreboard-table tbody tr {
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: rowPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+@keyframes rowPop {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.scoreboard-table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.scoreboard-table tbody tr:nth-child(2) { animation-delay: 0.1s; }
+.scoreboard-table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.scoreboard-table tbody tr:nth-child(4) { animation-delay: 0.2s; }
+.scoreboard-table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+.scoreboard-table tbody tr:nth-child(6) { animation-delay: 0.3s; }
+
+.scoreboard-table td {
+    padding: 16px 14px;
+    background: #fff;
+    color: #333;
+    font-weight: 800;
+    border-bottom: 2px dashed #EBF0F5;
+    vertical-align: middle;
+}
+
+.scoreboard-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Hover Lift */
+.scoreboard-table tbody tr:hover td {
+    background: #F8FAFC;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Student Profile (Avatar + Name) */
+.student-profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+}
+
+.student-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
+    border: 2px solid #FFF;
+    flex-shrink: 0;
+}
+
+.student-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 19px;
+    color: #2D3748;
+    letter-spacing: 0.5px;
+}
+
+/* Rank Badges */
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: #718096;
+}
+
+.rank-badge .rank-num {
+    display: inline-block;
+    min-width: 26px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 50%;
+    background: #EDF2F7;
+    color: #4A5568;
+    font-size: 14px;
+}
+
+/* Podium Styles (Top 3) */
+.student-row.top td {
+    background: linear-gradient(135deg, #FFFDF0 0%, #FFF9DE 100%);
+}
+.student-row.second td {
+    background: linear-gradient(135deg, #FBFBFB 0%, #F3F4F6 100%);
+}
+.student-row.third td {
+    background: linear-gradient(135deg, #FFF9F5 0%, #FDF0E7 100%);
+}
+
+.student-row.top .rank-badge .rank-num {
+    background: #FFD166;
+    color: #7A4100;
+}
+.student-row.second .rank-badge .rank-num {
+    background: #E2E8F0;
+    color: #475569;
+}
+.student-row.third .rank-badge .rank-num {
+    background: #FED7AA;
+    color: #7C2D12;
+}
+
+/* Floating Crown & Medals */
 .crown-icon {
     display: inline-block;
-    font-size: 45px;
-    filter: drop-shadow(0px 8px 10px rgba(0, 0, 0, 0.4));
+    font-size: 28px;
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.25));
     animation: crownFloat 2s ease-in-out infinite;
     line-height: 1;
 }
 
 .medal-icon {
     display: inline-block;
-    font-size: 35px;
-    filter: drop-shadow(0px 5px 6px rgba(0, 0, 0, 0.3));
+    font-size: 24px;
+    filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2));
     animation: medalFloat 2s ease-in-out infinite;
     line-height: 1;
 }
 
 @keyframes crownFloat {
     0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-8px) scale(1.2); }
+    50% { transform: translateY(-5px) scale(1.15); }
 }
 
 @keyframes medalFloat {
     0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-6px) scale(1.1); }
+    50% { transform: translateY(-3px) scale(1.1); }
 }
 
-/* Row Entrance Animation */
-@keyframes rowPop {
-    0% {
-        opacity: 0;
-        transform: scale(0.8) translateY(30px);
+/* Criteria Chips (Values on Desktop) */
+.criterion-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+}
+
+.scoreboard-table .criterion-chip .chip-label {
+    display: none; /* Hide label in desktop table view since header has it */
+}
+
+/* 6 Cute Candy Color Themes for Criteria */
+.chip-color-0 {
+    background: #E8F8F5;
+    color: #0E836A;
+    border: 1.5px solid #A3E4D7;
+}
+.chip-color-1 {
+    background: #EEF2FF;
+    color: #3730A3;
+    border: 1.5px solid #C7D2FE;
+}
+.chip-color-2 {
+    background: #FFFBEB;
+    color: #B45309;
+    border: 1.5px solid #FDE68A;
+}
+.chip-color-3 {
+    background: #FDF2F8;
+    color: #BE185D;
+    border: 1.5px solid #FBCFE8;
+}
+.chip-color-4 {
+    background: #F5F3FF;
+    color: #6D28D9;
+    border: 1.5px solid #DDD6FE;
+}
+.chip-color-5 {
+    background: #F0F9FF;
+    color: #0369A1;
+    border: 1.5px solid #BAE6FD;
+}
+
+/* Total Score Badge */
+.total-score-badge {
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #EF476F, #FF597B);
+    color: #FFF;
+    box-shadow: 0 4px 12px rgba(239, 71, 111, 0.35);
+    font-family: 'Fredoka One', cursive;
+    transition: transform 0.2s ease;
+}
+
+.total-score-badge .total-label {
+    display: none;
+}
+
+.total-score-badge .total-points {
+    font-size: 20px;
+}
+
+.total-score-badge .total-pts-unit {
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: 700;
+}
+
+/* Podium Total Badges */
+.student-row.top .total-score-badge {
+    background: linear-gradient(135deg, #FFD166, #FF9F1C);
+    color: #613300;
+    box-shadow: 0 6px 15px rgba(255, 159, 28, 0.45);
+}
+.student-row.second .total-score-badge {
+    background: linear-gradient(135deg, #CBD5E1, #94A3B8);
+    color: #1E293B;
+    box-shadow: 0 4px 12px rgba(148, 163, 184, 0.3);
+}
+.student-row.third .total-score-badge {
+    background: linear-gradient(135deg, #F4A261, #E76F51);
+    color: #FFF;
+    box-shadow: 0 4px 12px rgba(231, 111, 81, 0.35);
+}
+
+/* ========================================================
+   MOBILE SCREEN RESPONSIVE LEADERBOARD CARDS
+   (Activates on <= 768px OR when force-cards-view is set)
+   ======================================================== */
+@media (max-width: 768px) {
+    .table-div {
+        padding: 10px 8px;
     }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
+
+    .table-title h1 {
+        font-size: clamp(1.4rem, 6.5vw, 2rem);
+        padding: 10px 24px;
+        border-width: 5px;
+    }
+
+    .scoreboard-controls {
+        gap: 8px;
+    }
+
+    .stat-badge {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    /* Transform Table to Clean Leaderboard Cards */
+    .scoreboard-table,
+    .scoreboard-table thead,
+    .scoreboard-table tbody,
+    .scoreboard-table th,
+    .scoreboard-table td,
+    .scoreboard-table tr {
+        display: block;
+    }
+
+    .scoreboard-table thead {
+        display: none; /* Hide traditional table column headers */
+    }
+
+    .scoreboard-table {
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .scoreboard-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    /* Each Student Card */
+    .student-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        background: #ffffff !important;
+        border-radius: 22px !important;
+        padding: 14px 16px !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+        border: 2px solid rgba(255, 255, 255, 0.9) !important;
+        position: relative !important;
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        cursor: pointer;
+    }
+
+    .student-row:active {
+        transform: scale(0.98) !important;
+    }
+
+    /* Podium Cards Highlight */
+    .student-row.top {
+        background: linear-gradient(135deg, #FFFDF2 0%, #FFF9E0 100%) !important;
+        border-color: #FFD166 !important;
+        box-shadow: 0 10px 25px rgba(255, 209, 102, 0.45) !important;
+    }
+
+    .student-row.second {
+        background: linear-gradient(135deg, #F9FAFB 0%, #F1F5F9 100%) !important;
+        border-color: #CBD5E1 !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .student-row.third {
+        background: linear-gradient(135deg, #FFF9F5 0%, #FDF0E7 100%) !important;
+        border-color: #F4A261 !important;
+        box-shadow: 0 8px 20px rgba(244, 162, 97, 0.25) !important;
+    }
+
+    /* Card Top Line: Rank + Name + Total */
+    .col-pos {
+        order: 1 !important;
+        flex: 0 0 auto !important;
+        padding: 0 !important;
+        margin-right: 8px !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    .col-name {
+        order: 2 !important;
+        flex: 1 1 auto !important;
+        padding: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        text-align: left !important;
+        min-width: 120px !important;
+    }
+
+    .student-name {
+        font-size: 17px !important;
+    }
+
+    .student-avatar {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 16px !important;
+    }
+
+    .col-total {
+        order: 3 !important;
+        flex: 0 0 auto !important;
+        padding: 0 !important;
+        margin-left: auto !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    .total-score-badge {
+        padding: 5px 12px !important;
+    }
+
+    .total-score-badge .total-points {
+        font-size: 17px !important;
+    }
+
+    /* Divider between student header & criteria line */
+    .student-row::before {
+        content: "";
+        order: 4;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08) 10%, rgba(0, 0, 0, 0.08) 90%, transparent);
+        margin: 10px 0 6px 0;
+    }
+
+    /* Criteria Line: Wrapped cleanly across the card */
+    .col-criterion {
+        order: 5 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        padding: 0 !important;
+        margin: 4px 6px 4px 0 !important;
+        border: none !important;
+        background: transparent !important;
+    }
+
+    /* Reveal full label in mobile cards */
+    .col-criterion .chip-label {
+        display: inline !important;
+        font-size: 12.5px !important;
+        font-weight: 700 !important;
+        margin-right: 3px !important;
+        opacity: 0.9 !important;
+    }
+
+    .col-criterion .criterion-chip {
+        padding: 5px 11px !important;
+        font-size: 13px !important;
+        border-radius: 12px !important;
+    }
+
+    .col-criterion .chip-value {
+        font-size: 13.5px !important;
+        font-weight: 900 !important;
     }
 }
 
-tr {
-    animation: rowPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+/* Force Cards View (If user taps Cards on desktop) */
+.force-cards-view .scoreboard-table,
+.force-cards-view .scoreboard-table thead,
+.force-cards-view .scoreboard-table tbody,
+.force-cards-view .scoreboard-table th,
+.force-cards-view .scoreboard-table td,
+.force-cards-view .scoreboard-table tr {
+    display: block !important;
 }
 
-tr:nth-child(2) { animation-delay: 0.1s; }
-tr:nth-child(3) { animation-delay: 0.2s; }
-tr:nth-child(4) { animation-delay: 0.3s; }
-tr:nth-child(5) { animation-delay: 0.4s; }
-tr:nth-child(6) { animation-delay: 0.5s; }
-tr:nth-child(7) { animation-delay: 0.6s; }
-tr:nth-child(8) { animation-delay: 0.7s; }
+.force-cards-view .scoreboard-table thead {
+    display: none !important;
+}
 
-/* ------- pagination style -------------*/
+.force-cards-view .scoreboard-table {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.force-cards-view .scoreboard-table tbody {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+}
+
+.force-cards-view .student-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    background: #ffffff !important;
+    border-radius: 22px !important;
+    padding: 16px 20px !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+    position: relative !important;
+}
+
+.force-cards-view .col-pos { order: 1 !important; flex: 0 0 auto !important; margin-right: 12px !important; }
+.force-cards-view .col-name { order: 2 !important; flex: 1 1 auto !important; }
+.force-cards-view .col-total { order: 3 !important; flex: 0 0 auto !important; margin-left: auto !important; }
+.force-cards-view .student-row::before {
+    content: "";
+    order: 4;
+    width: 100%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    margin: 12px 0 8px 0;
+}
+.force-cards-view .col-criterion {
+    order: 5 !important;
+    display: inline-flex !important;
+    margin: 4px 8px 4px 0 !important;
+    background: transparent !important;
+}
+.force-cards-view .col-criterion .chip-label { display: inline !important; }
+
+/* Force Table View (If user wants horizontal scrollable table on mobile) */
+.force-table-view .scoreboard-table {
+    display: table !important;
+    min-width: 600px !important;
+    overflow-x: auto !important;
+}
+.force-table-view .scoreboard-table thead { display: table-header-group !important; }
+.force-table-view .scoreboard-table tbody { display: table-row-group !important; }
+.force-table-view .scoreboard-table tr { display: table-row !important; }
+.force-table-view .scoreboard-table th,
+.force-table-view .scoreboard-table td { display: table-cell !important; }
+.force-table-view {
+    overflow-x: auto !important;
+    width: 100% !important;
+}
+
+/* Group Subtitle Styling */
+.group-subtitle-container {
+    text-align: center;
+    margin: 15px auto;
+    width: 100%;
+}
+
+.group-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-radius: 40px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.group-badge h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(16px, 4vw, 22px);
+    color: #FFF;
+    letter-spacing: 0.8px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Pagination */
 .pagination {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 20px;
-    gap: 15px;
-    margin-bottom: 30px;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    padding: 0 10px;
 }
 
 .pagination a {
     color: #EF476F;
-    padding: 12px 22px;
+    min-width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
     background: #FFF;
     border-radius: 50%;
     font-family: 'Fredoka One', cursive;
-    font-size: 20px;
-    box-shadow: 0 8px 0px #DDD, 0 15px 20px rgba(0, 0, 0, 0.15);
+    font-size: 18px;
+    box-shadow: 0 6px 0px #DDD, 0 10px 18px rgba(0, 0, 0, 0.15);
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .pagination a.active {
     background: #06D6A0;
     color: white;
-    box-shadow: 0 8px 0px #04A57B, 0 15px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 6px 0px #04A57B, 0 12px 20px rgba(6, 214, 160, 0.35);
+    transform: translateY(-4px) scale(1.1);
 }
 
 .pagination a:hover:not(.active) {
     background: #FFE3E9;
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 10px 0px #E5B2BD, 0 20px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 8px 0px #E5B2BD, 0 15px 22px rgba(0, 0, 0, 0.2);
     color: #D61B46;
 }
 
 .pagination a:active:not(.active) {
-    transform: translateY(8px) scale(0.95);
-    box-shadow: 0 0px 0px #DDD;
+    transform: translateY(4px) scale(0.95);
+    box-shadow: 0 1px 0px #DDD;
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 600px) {
-    .table-div {
-        padding: 5px;
+@media (max-width: 500px) {
+    .pagination {
+        gap: 6px;
     }
-
-    table {
-        width: 100%;
-        border-radius: 20px;
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), inset 0 0 0 6px rgba(255, 255, 255, 0.6);
-        border: none;
-    }
-
-    td {
-        font-size: 16px;
-        padding: 12px 8px;
-    }
-    
-    th {
-        font-size: 16px;
-        padding: 15px 8px;
-    }
-
-    .top td {
-        font-size: 18px;
-    }
-
-    .table-title h1 {
-        font-size: clamp(1.2rem, 6vw, 2rem);
-        padding: 10px 25px;
-        border-width: 5px;
-        box-shadow: 0 6px 0px #CC7910, 0 15px 20px rgba(0, 0, 0, 0.2);
-        white-space: nowrap; /* Ensures mobile doesn't wrap! */
-    }
-
     .pagination a {
-        padding: 10px 18px;
-        font-size: 16px;
-        gap: 10px;
+        min-width: 38px;
+        height: 38px;
+        font-size: 15px;
+        box-shadow: 0 4px 0px #DDD, 0 8px 12px rgba(0, 0, 0, 0.12);
     }
-    
-    .crown-icon { font-size: 35px; }
-    .medal-icon { font-size: 25px; }
 }

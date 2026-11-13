@@ -1,0 +1,775 @@
+/* Future Academy - Admin Dashboard Styling */
+
+body {
+    direction: rtl;
+    text-align: right;
+    min-height: 100vh;
+}
+
+/* ========================================================
+   LOGIN SCREEN
+   ======================================================== */
+.admin-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 35px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), inset 0 0 0 6px rgba(255, 255, 255, 0.7);
+    animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.lock-avatar {
+    font-size: 55px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.2));
+    animation: titleBounce 2s infinite alternate ease-in-out;
+}
+
+.login-card h2 {
+    font-family: 'Fredoka One', cursive, 'Nunito';
+    font-size: 26px;
+    color: #EF476F;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    font-size: 15px;
+    color: #4A5568;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.pin-input-group {
+    margin-bottom: 15px;
+}
+
+.pin-input-group input {
+    width: 220px;
+    height: 60px;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 12px;
+    border-radius: 20px;
+    border: 3px solid #E2E8F0;
+    background: #F8FAFC;
+    color: #2D3748;
+    font-family: 'Fredoka One', cursive, monospace;
+    transition: all 0.2s ease;
+}
+
+.pin-input-group input:focus {
+    outline: none;
+    border-color: #06D6A0;
+    background: #FFF;
+    box-shadow: 0 0 0 5px rgba(6, 214, 160, 0.25);
+}
+
+.login-error {
+    color: #E63946;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.login-hint {
+    background: #FFFBEB;
+    border: 1.5px solid #FDE68A;
+    border-radius: 14px;
+    padding: 10px 14px;
+    color: #92400E;
+    font-size: 13.5px;
+    margin-bottom: 20px;
+}
+
+.back-link {
+    color: #118AB2;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #06D6A0;
+}
+
+/* ========================================================
+   DASHBOARD SCREEN
+   ======================================================== */
+.admin-dashboard-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 15px;
+}
+
+/* Header */
+.admin-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 26px;
+    padding: 16px 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 34px;
+}
+
+.admin-header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    color: #EF476F;
+    margin-bottom: 2px;
+}
+
+.brand-sub {
+    font-size: 13px;
+    color: #718096;
+    font-weight: 700;
+}
+
+.header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.btn-view {
+    background: #06D6A0;
+    color: white;
+}
+.btn-view:hover {
+    background: #04b385;
+    transform: translateY(-2px);
+}
+
+.btn-settings {
+    background: #FFD166;
+    color: #613300;
+}
+.btn-settings:hover {
+    background: #ffc438;
+    transform: translateY(-2px);
+}
+
+.btn-logout {
+    background: #EF476F;
+    color: white;
+}
+.btn-logout:hover {
+    background: #d63359;
+    transform: translateY(-2px);
+}
+
+/* ========================================================
+   GROUPS SECTION
+   ======================================================== */
+.groups-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 26px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    margin-bottom: 20px;
+}
+
+.section-top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.groups-tabs-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    max-width: 100%;
+}
+
+.group-tab-btn {
+    padding: 10px 18px;
+    background: #F1F5F9;
+    color: #475569;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.group-tab-btn:hover {
+    background: #E2E8F0;
+}
+
+.group-tab-btn.active {
+    background: #118AB2;
+    color: white;
+    box-shadow: 0 4px 12px rgba(17, 138, 178, 0.35);
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 0px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-add-group {
+    background: #FF9F1C;
+    color: white;
+}
+.btn-add-group:hover {
+    background: #e0870c;
+    transform: translateY(-2px);
+}
+
+/* Active Group Details Card */
+.group-details-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: #F8FAFC;
+    border-radius: 18px;
+    padding: 14px 18px;
+    border: 2px dashed #CBD5E1;
+}
+
+.group-details-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 300px;
+}
+
+.group-details-form label {
+    font-weight: 800;
+    color: #334155;
+    font-size: 14.5px;
+}
+
+.input-with-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 250px;
+}
+
+.input-with-button input {
+    flex: 1;
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 2px solid #CBD5E1;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.btn-save-title {
+    padding: 8px 16px;
+    background: #06D6A0;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Fredoka One', cursive;
+    cursor: pointer;
+}
+
+.btn-delete-group {
+    padding: 8px 16px;
+    background: #FFF1F2;
+    color: #E11D48;
+    border: 2px solid #FECDD3;
+    border-radius: 12px;
+    font-family: 'Fredoka One', cursive;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-delete-group:hover {
+    background: #FFE4E6;
+}
+
+/* ========================================================
+   STUDENTS & SCORES SECTION
+   ======================================================== */
+.students-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-radius: 26px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    margin-bottom: 20px;
+}
+
+.students-header-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.students-count-badge {
+    background: #EFF6FF;
+    border: 1.5px solid #BFDBFE;
+    color: #1E40AF;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.students-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-add-student {
+    background: #06D6A0;
+    color: white;
+}
+.btn-add-student:hover {
+    background: #05be8e;
+    transform: translateY(-2px);
+}
+
+.btn-save-all {
+    background: #EF476F;
+    color: white;
+}
+.btn-save-all:hover {
+    background: #d8335a;
+    transform: translateY(-2px);
+}
+
+/* Students Table */
+.table-responsive-wrapper {
+    overflow-x: auto;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.admin-students-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    text-align: center;
+}
+
+.admin-students-table th {
+    background: #118AB2;
+    color: white;
+    padding: 14px 12px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.admin-students-table td {
+    padding: 12px 10px;
+    border-bottom: 1.5px dashed #E2E8F0;
+    vertical-align: middle;
+}
+
+.admin-students-table tr:hover {
+    background: #F8FAFC;
+}
+
+/* Table Inputs */
+.student-name-input {
+    width: 100%;
+    min-width: 130px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1.5px solid #CBD5E1;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    text-align: right;
+}
+
+.student-name-input:focus {
+    outline: none;
+    border-color: #118AB2;
+    box-shadow: 0 0 0 3px rgba(17, 138, 178, 0.2);
+}
+
+.score-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #F1F5F9;
+    border-radius: 12px;
+    padding: 2px 4px;
+}
+
+.score-stepper input {
+    width: 48px;
+    height: 34px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: #1E293B;
+}
+
+.score-stepper input:focus {
+    outline: none;
+    background: #FFF;
+    border-radius: 8px;
+}
+
+.step-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #CBD5E1;
+    color: #475569;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.15s;
+}
+
+.step-btn:hover {
+    background: #118AB2;
+    color: white;
+    border-color: #118AB2;
+}
+
+.admin-total-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #FFD166, #FF9F1C);
+    color: #613300;
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.btn-delete-student {
+    background: #FFF1F2;
+    color: #E11D48;
+    border: 1px solid #FECDD3;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-delete-student:hover {
+    background: #FFE4E6;
+    transform: scale(1.1);
+}
+
+/* ========================================================
+   BACKUP & TOOLS
+   ======================================================== */
+.tools-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 26px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.tools-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    color: #1E293B;
+    margin-bottom: 6px;
+}
+
+.tools-subtitle {
+    font-size: 13.5px;
+    color: #64748B;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.tools-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: #F1F5F9;
+    border: 1.5px solid #CBD5E1;
+    color: #334155;
+    font-family: 'Fredoka One', cursive;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-tool:hover {
+    background: #E2E8F0;
+    transform: translateY(-2px);
+}
+
+.btn-excel-tool {
+    background: #ECFDF5;
+    color: #065F46;
+    border-color: #A7F3D0;
+}
+.btn-excel-tool:hover {
+    background: #D1FAE5;
+    border-color: #6EE7B7;
+}
+
+.btn-excel-import {
+    background: #EFF6FF;
+    color: #1E40AF;
+    border-color: #BFDBFE;
+}
+.btn-excel-import:hover {
+    background: #DBEAFE;
+    border-color: #93C5FD;
+}
+
+.btn-danger-tool {
+    color: #DC2626;
+    border-color: #FCA5A5;
+}
+.btn-danger-tool:hover {
+    background: #FEE2E2;
+}
+
+/* ========================================================
+   MODALS & TOAST
+   ======================================================== */
+.admin-toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #06D6A0;
+    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    padding: 12px 28px;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(6, 214, 160, 0.4);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+}
+
+.admin-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.admin-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.admin-modal {
+    background: white;
+    border-radius: 26px;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.admin-modal h3 {
+    font-family: 'Fredoka One', cursive;
+    color: #EF476F;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.admin-modal p {
+    color: #64748B;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.admin-modal input {
+    width: 180px;
+    height: 48px;
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: 6px;
+    border-radius: 12px;
+    border: 2px solid #CBD5E1;
+    margin-bottom: 20px;
+    font-family: 'Fredoka One', cursive;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-primary {
+    padding: 10px 22px;
+    background: #06D6A0;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    padding: 10px 22px;
+    background: #E2E8F0;
+    color: #475569;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Fredoka One', cursive;
+    cursor: pointer;
+}
+
+/* ========================================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================================== */
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn-header {
+        font-size: 12.5px;
+        padding: 6px 12px;
+    }
+
+    .section-top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-add-group {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .students-header-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .students-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn-action {
+        flex: 1;
+        justify-content: center;
+        font-size: 13.5px;
+        padding: 8px 12px;
+    }
+}
