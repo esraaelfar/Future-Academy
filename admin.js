@@ -1,6 +1,7 @@
 /**
- * Future Academy - Admin Dashboard Script
+ * Future Academy - Engineer Dashboard Script
  * Connects with DataManager to provide full CRUD for Groups, Students, and Scores.
+ * Pure English interface for engineers.
  */
 
 let activeGroupId = 1;
@@ -53,7 +54,7 @@ function setupLogin() {
         if (DataManager.loginCoach(pin)) {
             errorMsg.style.display = "none";
             showDashboard();
-            showToast("أهلاً بك يا باشمهندس! تم تسجيل الدخول بنجاح 🚀");
+            showToast("Welcome Engineer. Esraa Elfar! Login successful 🚀");
         } else {
             errorMsg.style.display = "block";
             pinInput.value = "";
@@ -66,7 +67,7 @@ function setupLogin() {
     document.getElementById("btn-logout").addEventListener("click", () => {
         DataManager.logoutCoach();
         showLogin();
-        showToast("تم تسجيل الخروج");
+        showToast("Logged out successfully");
     });
 }
 
@@ -167,22 +168,22 @@ function renderGroupEditor() {
     const theadRow = document.getElementById("table-headers-row");
     theadRow.innerHTML = `
         <th style="width: 45px;">#</th>
-        <th>اسم الطالب</th>
+        <th>Student Name</th>
     `;
 
-    group.criteria.forEach((criterion, idx) => {
+    group.criteria.forEach((criterion) => {
         const th = document.createElement("th");
         th.innerText = criterion;
         theadRow.appendChild(th);
     });
 
     const thTotal = document.createElement("th");
-    thTotal.innerText = "المجموع 🏆";
+    thTotal.innerText = "Total 🏆";
     theadRow.appendChild(thTotal);
 
     const thAction = document.createElement("th");
-    thAction.style.width = "70px";
-    thAction.innerText = "حذف";
+    thAction.style.width = "75px";
+    thAction.innerText = "Action";
     theadRow.appendChild(thAction);
 
     // Render Students Table Body
@@ -191,14 +192,14 @@ function renderGroupEditor() {
 
 function handleAddGroup() {
     const defaultName = `Group ${DataManager.getAllGroups().length + 1}`;
-    const title = prompt("أدخل اسم أو موعد المجموعة الجديدة:", defaultName);
+    const title = prompt("Enter title or schedule for the new group:", defaultName);
     if (title === null) return;
 
     const newGroup = DataManager.addGroup(title.trim() || defaultName);
     activeGroupId = newGroup.id;
     renderGroupsTabs();
     renderGroupEditor();
-    showToast(`تمت إضافة ${newGroup.title} بنجاح! 🚀`);
+    showToast(`${newGroup.title} added successfully! 🚀`);
 }
 
 function handleSaveGroupTitle() {
@@ -208,20 +209,20 @@ function handleSaveGroupTitle() {
 
     DataManager.updateGroup(activeGroupId, { title: newTitle });
     renderGroupsTabs();
-    showToast("تم تحديث اسم المجموعة بنجاح! ✅");
+    showToast("Group title updated successfully! ✅");
 }
 
 function handleDeleteGroup() {
     const group = DataManager.getGroup(activeGroupId);
     if (!group) return;
 
-    if (confirm(`هل أنت متأكد من حذف ${group.title}؟ لا يمكن التراجع عن هذا الإجراء.`)) {
+    if (confirm(`Are you sure you want to delete ${group.title}? This action cannot be undone.`)) {
         try {
             DataManager.deleteGroup(activeGroupId);
             activeGroupId = DataManager.getAllGroups()[0].id;
             renderGroupsTabs();
             renderGroupEditor();
-            showToast("تم حذف المجموعة بنجاح!");
+            showToast("Group deleted successfully!");
         } catch (err) {
             alert(err.message);
         }
@@ -239,7 +240,7 @@ function renderStudentsRows(group) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="${group.criteria.length + 4}" style="padding: 30px; color: #94A3B8; font-weight: 700;">
-                    لا يوجد طلاب في هذه المجموعة بعد. اضغط على <strong>➕ إضافة طالب جديد</strong> للبدء!
+                    No students in this group yet. Click <strong>➕ Add New Student</strong> to start!
                 </td>
             </tr>
         `;
@@ -258,7 +259,7 @@ function renderStudentsRows(group) {
         // Column 2: Name Input
         const tdName = document.createElement("td");
         tdName.innerHTML = `
-            <input type="text" class="student-name-input" value="${escapeHtml(student.name)}" placeholder="اسم الطالب">
+            <input type="text" class="student-name-input" value="${escapeHtml(student.name)}" placeholder="Student Name">
         `;
         tr.appendChild(tdName);
 
@@ -287,13 +288,13 @@ function renderStudentsRows(group) {
         // Column: Delete Button
         const tdDelete = document.createElement("td");
         tdDelete.innerHTML = `
-            <button type="button" class="btn-delete-student" title="حذف الطالب">🗑️</button>
+            <button type="button" class="btn-delete-student" title="Delete Student">🗑️</button>
         `;
         tdDelete.querySelector(".btn-delete-student").addEventListener("click", () => {
-            if (confirm(`حذف الطالب "${student.name}" من هذه المجموعة؟`)) {
+            if (confirm(`Delete student "${student.name}" from this group?`)) {
                 DataManager.deleteStudent(activeGroupId, studentIdx);
                 renderGroupEditor();
-                showToast("تم حذف الطالب");
+                showToast("Student deleted successfully");
             }
         });
         tr.appendChild(tdDelete);
@@ -338,7 +339,7 @@ function renderStudentsRows(group) {
 }
 
 function handleAddStudent() {
-    const name = prompt("أدخل اسم الطالب الجديد:");
+    const name = prompt("Enter new student name:");
     if (!name || !name.trim()) return;
 
     const group = DataManager.getGroup(activeGroupId);
@@ -347,7 +348,7 @@ function handleAddStudent() {
     const initialScores = new Array(group.criteria.length).fill(0);
     DataManager.addStudent(activeGroupId, name.trim(), initialScores);
     renderGroupEditor();
-    showToast(`تمت إضافة الطالب "${name.trim()}" بنجاح! ⭐`);
+    showToast(`Student "${name.trim()}" added successfully! ⭐`);
 }
 
 function handleSaveAllChanges() {
@@ -376,12 +377,9 @@ function handleSaveAllChanges() {
 
     DataManager.updateGroup(activeGroupId, { students: updatedStudents });
     renderGroupEditor();
-    showToast("تم حفظ جميع تعديلات الطلاب والدرجات بنجاح! 🎉");
+    showToast("All changes and student grades saved successfully! 🎉");
 }
 
-/* ========================================================
-   BACKUP & PIN MODAL
-   ======================================================== */
 /* ========================================================
    EXCEL EXPORT & IMPORT (SheetJS)
    ======================================================== */
@@ -389,7 +387,7 @@ function handleSaveAllChanges() {
 // 1. Export All Groups to a Multi-Sheet Excel Workbook
 function exportAllGroupsToExcel() {
     if (typeof XLSX === "undefined") {
-        alert("تنبيه: مكتبة الإكسيل قيد التحميل، يرجى المحاولة بعد لحظات.");
+        alert("Notice: Excel library is still loading, please try again in a moment.");
         return;
     }
 
@@ -398,7 +396,7 @@ function exportAllGroupsToExcel() {
 
     groups.forEach((group) => {
         const sortedStudents = [...group.students].sort((a, b) => b.total - a.total);
-        const headers = ["المركز", "اسم الطالب", ...group.criteria, "المجموع 🏆"];
+        const headers = ["Rank", "Student Name", ...group.criteria, "Total 🏆"];
 
         const rows = sortedStudents.map((s, idx) => [
             idx + 1,
@@ -408,7 +406,7 @@ function exportAllGroupsToExcel() {
         ]);
 
         const sheetData = [
-            [`كشف درجات: ${group.title}`],
+            [`Grade Sheet: ${group.title}`],
             [],
             headers,
             ...rows
@@ -417,14 +415,13 @@ function exportAllGroupsToExcel() {
         const ws = XLSX.utils.aoa_to_sheet(sheetData);
         ws['!cols'] = [{ wch: 8 }, { wch: 22 }, { wch: 16 }, { wch: 16 }, { wch: 18 }, { wch: 14 }];
 
-        // Sheet name max 31 characters
         let safeSheetName = `Group_${group.id}`;
         XLSX.utils.book_append_sheet(wb, ws, safeSheetName);
     });
 
     const dateStr = new Date().toISOString().slice(0, 10);
     XLSX.writeFile(wb, `Future_Academy_All_Groups_${dateStr}.xlsx`);
-    showToast("تم تصدير كشف جميع المجموعات إلى ملف Excel بنجاح! 📊");
+    showToast("All groups exported to Excel successfully! 📊");
 }
 
 // 2. Export Current Active Group
@@ -436,7 +433,7 @@ function exportActiveGroupToExcel() {
 
     const wb = XLSX.utils.book_new();
     const sortedStudents = [...group.students].sort((a, b) => b.total - a.total);
-    const headers = ["المركز", "اسم الطالب", ...group.criteria, "المجموع 🏆"];
+    const headers = ["Rank", "Student Name", ...group.criteria, "Total 🏆"];
 
     const rows = sortedStudents.map((s, idx) => [
         idx + 1,
@@ -446,7 +443,7 @@ function exportActiveGroupToExcel() {
     ]);
 
     const sheetData = [
-        [`كشف درجات: ${group.title}`],
+        [`Grade Sheet: ${group.title}`],
         [],
         headers,
         ...rows
@@ -457,7 +454,7 @@ function exportActiveGroupToExcel() {
 
     XLSX.utils.book_append_sheet(wb, ws, `Group_${group.id}`);
     XLSX.writeFile(wb, `Future_Academy_Group_${group.id}_${new Date().toISOString().slice(0, 10)}.xlsx`);
-    showToast(`تم تصدير كشف Group ${group.id} إلى إكسيل! 📊`);
+    showToast(`Group ${group.id} exported to Excel successfully! 📊`);
 }
 
 // 3. Download Empty Excel Template
@@ -467,15 +464,15 @@ function downloadExcelTemplate() {
     const group = DataManager.getGroup(activeGroupId) || { criteria: ["Attendance 📅", "Tasks 📝", "Participation ⭐"] };
     const wb = XLSX.utils.book_new();
 
-    const headers = ["المركز", "اسم الطالب", ...group.criteria, "المجموع 🏆"];
+    const headers = ["Rank", "Student Name", ...group.criteria, "Total 🏆"];
     const sampleRows = [
-        [1, "أحمد محمد", 10, 20, 10, 40],
-        [2, "مريم علي", 10, 18, 9, 37]
+        [1, "Ahmed Mohamed", 10, 20, 10, 40],
+        [2, "Mariam Ali", 10, 18, 9, 37]
     ];
 
     const sheetData = [
-        ["قالب درجات الطلاب - Future Academy"],
-        ["ملاحظة: يمكنك إدخال أسماء الطلاب والدرجات، ثم استيراد الملف في الموقع"],
+        ["Student Grades Template - Future Academy"],
+        ["Note: Enter student names and scores, then import the file into the dashboard."],
         headers,
         ...sampleRows
     ];
@@ -485,13 +482,13 @@ function downloadExcelTemplate() {
 
     XLSX.utils.book_append_sheet(wb, ws, "Scores_Template");
     XLSX.writeFile(wb, "Future_Academy_Template.xlsx");
-    showToast("تم تحميل قالب الإكسيل الفارغ! 📄");
+    showToast("Excel template downloaded! 📄");
 }
 
 // 4. Import from Excel File (.xlsx, .xls, .csv)
 function importExcelFile(file) {
     if (typeof XLSX === "undefined") {
-        alert("مكتبة الإكسيل غير محملة!");
+        alert("Excel library is not loaded!");
         return;
     }
 
@@ -502,7 +499,7 @@ function importExcelFile(file) {
             const workbook = XLSX.read(data, { type: 'array' });
 
             if (!workbook || workbook.SheetNames.length === 0) {
-                throw new Error("ملف الإكسيل فارغ أو غير صالح!");
+                throw new Error("Excel file is empty or invalid!");
             }
 
             let importedGroupsCount = 0;
@@ -513,11 +510,11 @@ function importExcelFile(file) {
                 const rows = XLSX.utils.sheet_to_json(ws, { header: 1 });
                 if (!rows || rows.length < 2) return;
 
-                // Find header row (row containing 'name' or 'طالب' or 'اسم' or criteria)
+                // Find header row (row containing 'name' or criteria)
                 let headerRowIdx = -1;
                 for (let r = 0; r < rows.length; r++) {
                     const rowStr = (rows[r] || []).join(" ").toLowerCase();
-                    if (/name|طالب|اسم|pos|مركز|حضور|attendance/i.test(rowStr)) {
+                    if (/name|student|pos|rank|attendance|task/i.test(rowStr)) {
                         headerRowIdx = r;
                         break;
                     }
@@ -531,7 +528,7 @@ function importExcelFile(file) {
                 let nameColIdx = -1;
                 for (let c = 0; c < headerRow.length; c++) {
                     const cellVal = String(headerRow[c] || "").toLowerCase();
-                    if (/name|اسم|طالب/i.test(cellVal)) {
+                    if (/name|student/i.test(cellVal)) {
                         nameColIdx = c;
                         break;
                     }
@@ -566,7 +563,7 @@ function importExcelFile(file) {
                     if (!rowData || rowData.length === 0) continue;
 
                     const studentName = String(rowData[nameColIdx] || "").trim();
-                    if (!studentName || /مثال|example|مجموع|total|قالب/i.test(studentName)) continue;
+                    if (!studentName || /example|total|template|grade sheet/i.test(studentName)) continue;
 
                     // Collect score columns
                     const scores = [];
@@ -594,10 +591,10 @@ function importExcelFile(file) {
 
             renderGroupsTabs();
             renderGroupEditor();
-            showToast(`تم استيراد ${importedGroupsCount} مجموعة بنجاح من ملف الإكسيل! 📊🎉`);
+            showToast(`Successfully imported ${importedGroupsCount} group(s) from Excel! 📊🎉`);
         } catch (err) {
             console.error("Excel import error:", err);
-            alert("حدث خطأ أثناء قراءة ملف الإكسيل: " + err.message);
+            alert("Error reading Excel file: " + err.message);
         }
     };
 
@@ -605,12 +602,12 @@ function importExcelFile(file) {
 }
 
 function handleResetDefaults() {
-    if (confirm("هل أنت متأكد من استعادة البيانات الافتراضية؟ سيتم مسح أي تعديلات غير محفوظة في ملف إكسيل.")) {
+    if (confirm("Are you sure you want to restore default data? Any unsaved changes in Excel will be lost.")) {
         DataManager.resetToDefaults();
         activeGroupId = 1;
         renderGroupsTabs();
         renderGroupEditor();
-        showToast("تمت استعادة البيانات الافتراضية بنجاح!");
+        showToast("Default data restored successfully!");
     }
 }
 
@@ -636,7 +633,7 @@ function setupPinModal() {
         try {
             DataManager.setPin(val);
             modal.style.display = "none";
-            showToast("تم تغيير رمز المرور (PIN) بنجاح! 🔑");
+            showToast("Security PIN changed successfully! 🔑");
         } catch (err) {
             alert(err.message);
         }
